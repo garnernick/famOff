@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>EA Portal sign in</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F3EA}
+a{color:inherit}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/plain" id="dc-template">
+<div style="font-family: 'Jost', system-ui, sans-serif; color: #1B2433; background: #F7F3EA; min-height: 860px; display: flex; flex-direction: column">
+<div style="flex: 1 1 auto; display: flex; flex-wrap: wrap">
+
+<div style="flex: 1 1 420px; position: relative; isolation: isolate; overflow: hidden; background: #0E1A2E; color: #F7F3EA; padding: 48px 56px; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; box-sizing: border-box">
+<img src="assets/ea-hero.jpg" alt="Evening light above a layer of cloud, seen from a cabin window" style="position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 30% 60%">
+<div style="position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, rgba(14,26,46,0.88) 0%, rgba(14,26,46,0.70) 55%, rgba(14,26,46,0.85) 100%)"></div>
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="40" height="40" viewBox="0 0 40 40" role="img" aria-label="VoleAlti monogram"><circle cx="20" cy="20" r="18" fill="none" stroke="#C9A96B" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#C9A96B">VA</text></svg>
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: 'Cinzel', serif; font-size: 20px; letter-spacing: 0.14em">VOLEALTI</span>
+<span style="font-size: 12px; color: #B9C2D2">Private Aviation, Handled Personally</span>
+</span>
+</a>
+<div style="position: relative; display: flex; flex-direction: column; gap: 16px; max-width: 420px">
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #F7F3EA">Discretion and privacy come first, so every sign-in uses two-step verification. We are sorry it adds a moment.</p>
+<button onMouseEnter="{{tipOn}}" onMouseLeave="{{tipOff}}" onFocus="{{tipOn}}" onBlur="{{tipOff}}" onClick="{{tipToggle}}" aria-label="What is two-step verification?" style="align-self: flex-start; min-height: 44px; padding: 0; border: 0; border-bottom: 1px dotted #C9A96B; background: transparent; color: #D9DEE8; font: inherit; font-size: 14px; cursor: help">What is two-step verification?</button>
+<sc-if value="{{showTip}}" hint-placeholder-val="{{ false }}">
+<div role="tooltip" style="position: absolute; left: 0; right: 0; bottom: 52px; z-index: 2; pointer-events: none; box-sizing: border-box; border: 1px solid #3A4966; background: rgba(14,26,46,0.98); padding: 14px 16px; font-size: 14px; line-height: 1.6; color: #D9DEE8">Two-step verification, often called MFA, asks for a second proof that it is you, such as a code from your phone, as well as your password. A password on its own is not enough to sign in.</div>
+</sc-if>
+</div>
+</div>
+
+<div style="flex: 1 1 520px; display: flex; align-items: center; justify-content: center; padding: 48px 24px; box-sizing: border-box">
+<div style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 24px">
+
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #566070">
+<span style="{{dot1}}">1</span><span>Password</span>
+<span style="flex: 1; height: 1px; background: #CFC7B3"></span>
+<span style="{{dot2}}">2</span><span>Verify</span>
+<span style="flex: 1; height: 1px; background: #CFC7B3"></span>
+<span style="{{dot3}}">3</span><span>Done</span>
+</div>
+
+<sc-if value="{{showStep1}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 26px; color: #0E1A2E">Sign in</h2>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Email<input type="email" placeholder="name@example.com" style="box-sizing: border-box; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Password<input type="password" placeholder="Enter your password" style="box-sizing: border-box; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></label>
+<button onClick="{{goStep2}}" style="min-height: 48px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer">Continue</button>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 14px"><a href="#" style="color: #7A5C24">Forgot password?</a><a href="Main.dc.html#how" style="color: #7A5C24">Request access</a></div>
+</div>
+</sc-if>
+
+<sc-if value="{{showStep2}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 26px; color: #0E1A2E">Verify it is you</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Choose how you would like to receive your code.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button onClick="{{pickApp}}" style="{{methodApp}}">Authenticator app</button><button onClick="{{pickKey}}" style="{{methodKey}}">Passkey</button>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #566070">{{methodHelp}}</p>
+<sc-if value="{{showCode}}" hint-placeholder-val="{{ true }}"><label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">6-digit code<input type="text" inputmode="numeric" placeholder="000000" style="box-sizing: border-box; min-height: 52px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 22px; letter-spacing: 0.3em; color: #1B2433"></label></sc-if>
+<button onClick="{{goStep3}}" style="min-height: 48px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer">{{verifyLabel}}</button>
+<button onClick="{{goStep1}}" style="min-height: 44px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; cursor: pointer">Back</button>
+</div>
+</sc-if>
+
+<sc-if value="{{showStep3}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#7A5C24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 26px; color: #0E1A2E">You are signed in</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Your open quotes and upcoming trips are waiting on the home page.</p>
+<a href="Home.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font-weight: 600; text-decoration: none">Go to home</a>
+<button onClick="{{goStep1}}" style="min-height: 44px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; cursor: pointer">Restart the journey</button>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+<div style="background: #0E1A2E; color: #B9C2D2; padding: 20px 24px; text-align: center; font-size: 14px">Need help signing in? <a href="mailto:info@volealti.com" style="color: #F7F3EA; text-decoration: none; border-bottom: 1px solid #C9A96B">info@volealti.com</a></div>
+</div>
+</script>
+<script type="text/plain" id="dc-logic">
+class Component extends DCLogic {
+state = { step: 1, method: 'app', tip: false };
+renderVals() {
+const s = this.state;
+const dotOn = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#0E1A2E;color:#F7F3EA;font-size:13px;font-weight:600';
+const dotOff = 'display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#E3DCCB;color:#566070;font-size:13px;font-weight:600';
+const on = 'min-height:44px;padding:0 16px;border-radius:6px;border:1px solid #0E1A2E;background:#0E1A2E;color:#F7F3EA;font:inherit;font-size:14px;cursor:pointer';
+const off = 'min-height:44px;padding:0 16px;border-radius:6px;border:1px solid #CFC7B3;background:#FFFFFF;color:#1B2433;font:inherit;font-size:14px;cursor:pointer';
+const help = {
+app: 'Open your authenticator app and enter the current code for VoleAlti.',
+key: 'Use the passkey on this device when prompted, with your fingerprint, face or screen lock. No code needed.'
+};
+return {
+showStep1: s.step === 1,
+showStep2: s.step === 2,
+showStep3: s.step === 3,
+showCode: s.method !== 'key',
+verifyLabel: s.method === 'key' ? 'Sign in with passkey' : 'Verify and sign in',
+showTip: s.tip,
+tipOn: () => this.setState({ tip: true }),
+tipOff: () => this.setState({ tip: false }),
+tipToggle: () => this.setState({ tip: !this.state.tip }),
+dot1: s.step >= 1 ? dotOn : dotOff,
+dot2: s.step >= 2 ? dotOn : dotOff,
+dot3: s.step >= 3 ? dotOn : dotOff,
+methodApp: s.method === 'app' ? on : off,
+methodKey: s.method === 'key' ? on : off,
+methodHelp: help[s.method],
+pickApp: () => this.setState({ method: 'app' }),
+pickKey: () => this.setState({ method: 'key' }),
+goStep1: () => this.setState({ step: 1 }),
+goStep2: () => this.setState({ step: 2 }),
+goStep3: () => this.setState({ step: 3 })
+};
+}
+}
+</script>
+<script src="./dc-lite.js"></script>
+</body>
+</html>

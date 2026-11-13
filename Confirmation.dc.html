@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>EA Portal request received</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F3EA}
+@media (max-width: 640px){.hamb{display:inline-flex !important;align-items:center;justify-content:center;width:44px;height:44px;cursor:pointer;margin-right:-10px}.mainnav{display:none !important;flex:1 1 100%;flex-direction:column;align-items:stretch !important;gap:0 !important;border-top:1px solid #24324C}.navtoggle:checked ~ .mainnav{display:flex !important}.mainnav a{display:flex;align-items:center;min-height:48px;padding:0 4px;border-bottom:1px solid #1B2A44}.mainnav a[href="Main.dc.html"]{justify-content:center;margin:14px 0 4px;border:1px solid #3A4966 !important}.fld{flex:1 1 100% !important}.snav{flex:1 1 100% !important;flex-direction:row !important;overflow-x:auto;gap:6px !important}.snav button{flex:none;white-space:nowrap;padding:0 12px !important;font-size:15px !important}.ovwrap{padding:16px !important}.ovcard{padding:20px !important;max-height:calc(100vh - 32px) !important}}
+a{color:inherit}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/plain" id="dc-template">
+<div style="font-family: 'Jost', system-ui, sans-serif; color: #1B2433; background: #F7F3EA; min-height: 900px">
+
+<div style="background: #0E1A2E; color: #F7F3EA">
+<div style="max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<a href="Home.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="36" height="36" viewBox="0 0 40 40" role="img" aria-label="VoleAlti monogram"><circle cx="20" cy="20" r="18" fill="none" stroke="#C9A96B" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#C9A96B">VA</text></svg>
+<span style="font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.14em">VOLEALTI</span>
+</a>
+<input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Menu" style="position: absolute; opacity: 0; width: 1px; height: 1px">
+<label for="navtoggle" class="hamb" style="display: none" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F7F3EA" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<nav class="mainnav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; font-size: 15px">
+<a href="Home.dc.html" style="text-decoration: none; color: #D9DEE8">Home</a>
+<a href="Calendar.dc.html" style="text-decoration: none; color: #D9DEE8">Calendar</a>
+<a href="Home.dc.html#search" style="text-decoration: none; color: #C9A96B; font-weight: 500">Search</a>
+<a href="Home.dc.html#trips" style="text-decoration: none; color: #D9DEE8">Trips</a>
+<a href="Account.dc.html" style="text-decoration: none; color: #D9DEE8">Account</a>
+<a href="Main.dc.html" style="text-decoration: none; color: #B9C2D2; font-size: 14px; border: 1px solid #3A4966; border-radius: 6px; padding: 10px 14px">Sign out</a>
+</nav>
+</div>
+</div>
+
+<div style="max-width: 680px; margin: 0 auto; padding: 56px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+
+<div style="display: flex; flex-direction: column; gap: 14px">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#7A5C24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+<h1 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 34px; line-height: 1.2; color: #0E1A2E">Request received</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #566070">Your request is now in [Name]'s workflow. We will be in contact within 2 working hours.</p>
+</div>
+
+<div style="background: #0E1A2E; color: #F7F3EA; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; letter-spacing: 0.12em; color: #C9A96B">YOU WILL HEAR FROM US BY</span>
+<span style="font-size: 26px; font-weight: 600">{{due}}</span>
+<span style="font-size: 14px; color: #B9C2D2">Shown in your local time. Working hours are Monday to Friday, 09:00 to 17:30 UK time.</span>
+<span style="font-size: 15px; color: #D9DEE8; padding-top: 6px">Your contact: [Name], [direct line]</span>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 10px; padding: 24px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 20px; color: #0E1A2E">Your request</h2>
+<span style="font-size: 13px; color: #566070">Reference [Ref]</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 18px; font-weight: 600">Luton to Geneva, return</span></div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px 40px; font-size: 15px; color: #566070">
+<span>Depart <strong style="color: #1B2433; font-weight: 500">Fri 12 Dec</strong></span>
+<span>Return <strong style="color: #1B2433; font-weight: 500">Sun 14 Dec</strong></span>
+<span>Passengers <strong style="color: #1B2433; font-weight: 500">4</strong></span>
+<span>Flexibility <strong style="color: #1B2433; font-weight: 500">± 24 hours</strong></span>
+<span>Category <strong style="color: #1B2433; font-weight: 500">Mid-sized</strong></span>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<a href="Home.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 28px; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font-weight: 600; text-decoration: none">Back to home</a>
+<a href="Home.dc.html#search" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 28px; border-radius: 6px; border: 1px solid #CFC7B3; color: #1B2433; text-decoration: none">Find another flight</a>
+</div>
+
+<span style="font-size: 13px; color: #566070; border: 1px dashed #CFC7B3; border-radius: 6px; padding: 8px 12px; align-self: flex-start">Draft with sample content</span>
+
+</div>
+</div>
+</script>
+<script type="text/plain" id="dc-logic">
+class Component extends DCLogic {
+renderVals() {
+const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/London', weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' });
+let need = 120;
+let t = Date.now();
+t -= t % 60000;
+let guard = 0;
+while (need > 0 && guard++ < 20000) {
+t += 60000;
+const p = fmt.formatToParts(new Date(t));
+const day = p.find((x) => x.type === 'weekday').value;
+const mins = +p.find((x) => x.type === 'hour').value * 60 + +p.find((x) => x.type === 'minute').value;
+if (day !== 'Sat' && day !== 'Sun' && mins > 540 && mins <= 1050) need--;
+}
+const due = new Date(t).toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' });
+return { due };
+}
+}
+</script>
+<script src="./dc-lite.js"></script>
+</body>
+</html>

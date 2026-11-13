@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>EA Portal account</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F3EA}
+@media (max-width: 640px){.hamb{display:inline-flex !important;align-items:center;justify-content:center;width:44px;height:44px;cursor:pointer;margin-right:-10px}.mainnav{display:none !important;flex:1 1 100%;flex-direction:column;align-items:stretch !important;gap:0 !important;border-top:1px solid #24324C}.navtoggle:checked ~ .mainnav{display:flex !important}.mainnav a{display:flex;align-items:center;min-height:48px;padding:0 4px;border-bottom:1px solid #1B2A44}.mainnav a[href="Main.dc.html"]{justify-content:center;margin:14px 0 4px;border:1px solid #3A4966 !important}.fld{flex:1 1 100% !important}.snav{flex:1 1 100% !important;flex-direction:row !important;overflow-x:auto;gap:6px !important}.snav button{flex:none;white-space:nowrap;padding:0 12px !important;font-size:15px !important}.ovwrap{padding:16px !important}.ovcard{padding:20px !important;max-height:calc(100vh - 32px) !important}}
+a{color:inherit}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/plain" id="dc-template">
+<div style="font-family: 'Jost', system-ui, sans-serif; color: #1B2433; background: #F7F3EA">
+
+<div style="background: #0E1A2E; color: #F7F3EA">
+<div style="max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<a href="Home.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="36" height="36" viewBox="0 0 40 40" role="img" aria-label="VoleAlti monogram"><circle cx="20" cy="20" r="18" fill="none" stroke="#C9A96B" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#C9A96B">VA</text></svg>
+<span style="font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.14em">VOLEALTI</span>
+</a>
+<input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Menu" style="position: absolute; opacity: 0; width: 1px; height: 1px">
+<label for="navtoggle" class="hamb" style="display: none" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F7F3EA" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<nav class="mainnav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; font-size: 15px">
+<a href="Home.dc.html" style="text-decoration: none; color: #D9DEE8">Home</a>
+<a href="Calendar.dc.html" style="text-decoration: none; color: #D9DEE8">Calendar</a>
+<a href="Home.dc.html#search" style="text-decoration: none; color: #D9DEE8">Search</a>
+<a href="Home.dc.html#trips" style="text-decoration: none; color: #D9DEE8">Trips</a>
+<a href="Account.dc.html" style="text-decoration: none; color: #C9A96B; font-weight: 500">Account</a>
+<a href="Main.dc.html" style="text-decoration: none; color: #B9C2D2; font-size: 14px; border: 1px solid #3A4966; border-radius: 6px; padding: 10px 14px">Sign out</a>
+</nav>
+</div>
+</div>
+
+<div style="max-width: 1120px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+<h1 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 32px; color: #0E1A2E">Account</h1>
+
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+
+<nav class="snav" style="flex: 0 1 220px; min-width: 200px; display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{sections}}" as="s" hint-placeholder-count="6">
+<button onClick="{{s.pick}}" style="{{s.style}}">{{s.label}}</button>
+</sc-for>
+</nav>
+
+<div style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 22px">
+
+<sc-if value="{{showUsers}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Users</h2>
+<button style="min-height: 44px; padding: 0 22px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer">Invite user</button>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Everyone has their own login. Choose what each person can see and do.</p>
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="text-align: left; color: #566070; font-size: 13px"><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500">Name</th><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500">Role</th><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500">Second step</th></tr></thead>
+<tbody>
+<tr><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">[Name], you</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">Account owner</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">Authenticator app</td></tr>
+<tr><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">[Colleague]</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">Assistant, can book</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">Passkey</td></tr>
+<tr><td style="padding: 14px 8px">[Finance contact]</td><td style="padding: 14px 8px">Invoices only</td><td style="padding: 14px 8px">Not yet set up</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showPay}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Pay</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Pay by bank transfer or card. Choose a default and change it per booking.</p>
+<div style="border: 1px solid #0E1A2E; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 17px; font-weight: 600">Bank transfer</span>
+<span style="font-size: 14px; color: #566070">Recommended. No card fee.</span>
+</div>
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 17px; font-weight: 600">Company card</span>
+<span style="font-size: 14px; color: #566070">A convenience fee covers the card processing cost and is shown before you pay.</span>
+</div>
+<button style="align-self: flex-start; min-height: 44px; padding: 0 22px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-weight: 500; cursor: pointer">Add a card</button>
+</div>
+</sc-if>
+
+<sc-if value="{{showInvoicing}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Invoicing</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Every invoice for every trip, ready to download for your finance team.</p>
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 15px">
+<thead><tr style="text-align: left; color: #566070; font-size: 13px"><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500">Invoice</th><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500">Trip</th><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500">Status</th><th style="padding: 10px 8px; border-bottom: 1px solid #E3DCCB; font-weight: 500"></th></tr></thead>
+<tbody>
+<tr><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">[Invoice no.]</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">Luton to Geneva</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA">Awaiting payment</td><td style="padding: 14px 8px; border-bottom: 1px solid #EFE9DA"><a href="#" style="color: #7A5C24; font-weight: 500">Download</a></td></tr>
+<tr><td style="padding: 14px 8px">[Invoice no.]</td><td style="padding: 14px 8px">Farnborough to Nice</td><td style="padding: 14px 8px">Paid</td><td style="padding: 14px 8px"><a href="#" style="color: #7A5C24; font-weight: 500">Download</a></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showHistory}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">History</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Past trips, and a record of who did what on the account.</p>
+<div style="display: flex; flex-direction: column">
+<div style="padding: 14px 0; border-bottom: 1px solid #EFE9DA; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 16px; font-weight: 500">Quote accepted, Farnborough to Nice</span><span style="font-size: 14px; color: #566070">[Colleague], [date]</span></div>
+<div style="padding: 14px 0; border-bottom: 1px solid #EFE9DA; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 16px; font-weight: 500">Signed in from a new device</span><span style="font-size: 14px; color: #566070">[Name], [date]</span></div>
+<div style="padding: 14px 0; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 16px; font-weight: 500">Trip completed, Geneva to Luton</span><span style="font-size: 14px; color: #566070">[date]</span></div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{showReferrals}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Referrals</h2>
+<sc-if value="{{refList}}" hint-placeholder-val="{{ true }}"><button onClick="{{startRefer}}" style="min-height: 44px; padding: 0 22px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer">Refer a colleague</button></sc-if>
+</div>
+
+<sc-if value="{{refList}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Know another EA or PA who would benefit? Create a link and send it to them yourself. A referral counts once your colleague has transacted.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<div style="flex: 1 1 100px; border: 1px solid #E3DCCB; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 32px; font-weight: 600; color: #0E1A2E">{{statQ}}</span><span style="font-size: 14px; color: #566070">Transacted this quarter</span></div>
+<div style="flex: 1 1 100px; border: 1px solid #E3DCCB; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 32px; font-weight: 600; color: #0E1A2E">{{statY}}</span><span style="font-size: 14px; color: #566070">Transacted this year</span></div>
+<div style="flex: 1 1 100px; border: 1px solid #E3DCCB; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 32px; font-weight: 600; color: #566070">{{statAll}}</span><span style="font-size: 14px; color: #566070">Referred in total</span></div>
+</div>
+<sc-for list="{{refs}}" as="r" hint-placeholder-count="5">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 600">{{r.name}}</span><span style="font-size: 14px; color: #566070">{{r.detail}}</span></div>
+<span style="{{r.chipStyle}}">{{r.status}}</span>
+</div>
+<div style="display: flex; gap: 6px">
+<sc-for list="{{r.steps}}" as="s" hint-placeholder-count="4"><div style="flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 6px"><div style="{{s.bar}}"></div><span style="{{s.label}}">{{s.text}}</span></div></sc-for>
+</div>
+<sc-if value="{{r.canAdvance}}" hint-placeholder-val="{{ false }}"><button onClick="{{r.advance}}" style="align-self: flex-start; min-height: 36px; padding: 0 12px; border: 1px dashed #B9B09A; border-radius: 6px; background: transparent; color: #566070; font: inherit; font-size: 13px; cursor: pointer">Demo only: move this referral on one step</button></sc-if>
+</div>
+</sc-for>
+<button onClick="{{resetRefs}}" style="align-self: flex-start; min-height: 36px; padding: 0 12px; border: 1px dashed #B9B09A; border-radius: 6px; background: transparent; color: #566070; font: inherit; font-size: 13px; cursor: pointer">Demo only: reset referrals to the sample list</button>
+</sc-if>
+
+<sc-if value="{{refNew}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Tell us who you are referring so you can find them in your list. We do not email your colleague. You send the link yourself, from your own email.</p>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Colleague's name<input type="text" value="{{refName}}" onInput="{{setName}}" placeholder="For example, Jane Smith" style="box-sizing: border-box; width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Colleague's email, optional (only used to address your email to them)<input type="text" value="{{refEmail}}" onInput="{{setEmail}}" placeholder="name@example.com" style="box-sizing: border-box; width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></label>
+<sc-if value="{{refErr}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #8A2B2B">Add a name so you can find this referral later.</span></sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 12px"><button onClick="{{createRef}}" style="min-height: 44px; padding: 0 22px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer">Create referral link</button><button onClick="{{toList}}" style="min-height: 44px; padding: 0 20px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; color: #1B2433; font: inherit; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center">Cancel</button></div>
+</sc-if>
+
+<sc-if value="{{refLink}}" hint-placeholder-val="{{ false }}">
+<div style="background: #F1E7D0; border-radius: 8px; padding: 14px 16px; font-size: 15px">Referral link created for {{refName}}. It now shows in your list as "Referral not clicked".</div>
+<ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 1.5; color: #1B2433">
+<li>Copy the message below, or just the link.</li>
+<li>Paste it into an email from your own address to {{refName}}.</li>
+<li>Come back here to follow their progress.</li>
+</ol>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Your referral link<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px"><span style="flex: 1 1 240px; min-width: 0; overflow-wrap: anywhere; border: 1px solid #CFC7B3; border-radius: 6px; background: #FBF9F3; padding: 12px 14px; font-size: 15px; color: #1B2433">{{refUrl}}</span><button onClick="{{copyLink}}" style="min-height: 44px; padding: 0 20px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; color: #1B2433; font: inherit; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center">{{copyLinkLabel}}</button></div></div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Suggested email, edit it as you like
+<span style="font-size: 15px; color: #1B2433"><strong style="font-weight: 600">Subject:</strong> An introduction to VoleAlti</span>
+<textarea rows="11" onInput="{{setBody}}" style="box-sizing: border-box; width: 100%; padding: 12px 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 15px; line-height: 1.5; color: #1B2433; resize: vertical" value="{{refBody}}"></textarea></label>
+<div style="display: flex; flex-wrap: wrap; gap: 12px"><button onClick="{{copyMsg}}" style="min-height: 44px; padding: 0 22px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer">{{copyMsgLabel}}</button><a href="{{mailto}}" target="_blank" rel="noopener" onClick="{{mailClick}}" style="min-height: 44px; padding: 0 20px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; color: #1B2433; font: inherit; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center">Open in my email app</a><button onClick="{{toList}}" style="min-height: 44px; padding: 0 20px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; color: #1B2433; font: inherit; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center">Back to referrals</button></div>
+<sc-if value="{{mailHint}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #566070">If your email app did not open, use "Copy message" and paste it into a new email, or try <a href="{{gmailUrl}}" target="_blank" rel="noopener" style="color: #7A5C24">Gmail</a> or <a href="{{outlookUrl}}" target="_blank" rel="noopener" style="color: #7A5C24">Outlook on the web</a>.</span></sc-if>
+<span style="font-size: 13px; color: #566070">Sample link and wording for the draft. The real link will be unique to you.</span>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{showAccount}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Account</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Organisation<input type="text" placeholder="[Organisation name]" style="box-sizing: border-box; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></label>
+<label style="flex: 1 1 220px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Your name<input type="text" placeholder="[Name]" style="box-sizing: border-box; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></label>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #EFE9DA; padding-top: 20px">
+<h3 style="margin: 0; font-size: 18px; font-weight: 600">Sign-in security</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">Manage your password and second-step methods: passkey or authenticator app.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<button style="min-height: 44px; padding: 0 20px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-weight: 500; cursor: pointer">Change password</button>
+<button style="min-height: 44px; padding: 0 20px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-weight: 500; cursor: pointer">Manage second step</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+</div>
+</script>
+<script type="text/plain" id="dc-logic">
+class Component extends DCLogic {
+state = { sec: 'account', refView: 'list', refName: '', refEmail: '', refUrl: '', refBody: '', refErr: false, copied: '', refs: this.loadRefs() || [
+{ id: 1, name: 'Priya Nair', org: '[Organisation]', stage: 3, sent: '2026-09-02', when: '2026-10-21' },
+{ id: 2, name: 'Tom Whitfield', org: '[Organisation]', stage: 3, sent: '2026-06-14', when: '2026-08-12' },
+{ id: 3, name: 'Marcus Odell', org: '[Organisation]', stage: 2, sent: '2026-10-28', when: '2026-11-06' },
+{ id: 4, name: 'Elena Rossi', org: '[Organisation]', stage: 1, sent: '2026-10-30', when: '2026-11-03' },
+{ id: 5, name: 'James Carver', org: '[Organisation]', stage: 0, sent: '2026-11-10', when: '' }
+] };
+loadRefs() { try { const s = sessionStorage.getItem('va_demo_refs'); return s ? JSON.parse(s) : null; } catch (e) { return null; } }
+saveRefs(refs) { try { sessionStorage.setItem('va_demo_refs', JSON.stringify(refs)); } catch (e) {} }
+renderVals() {
+const list = [['account', 'Account'], ['referrals', 'Referrals'], ['users', 'Users'], ['pay', 'Pay'], ['invoicing', 'Invoicing'], ['history', 'History']];
+const on = 'min-height: 46px; padding: 0 16px; text-align: left; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-size: 16px; font-weight: 500; cursor: pointer';
+const off = 'min-height: 46px; padding: 0 16px; text-align: left; border: 0; border-radius: 6px; background: transparent; color: #1B2433; font: inherit; font-size: 16px; cursor: pointer';
+const s = this.state.sec;
+const fmt = (iso) => new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const labels = ['Referral not clicked', 'Referee registered with platform', 'Referee first quote', 'Referee transacted'];
+const now = new Date();
+const qOf = (d) => Math.floor(d.getMonth() / 3);
+const done = this.state.refs.filter((r) => r.stage === 3 && r.when).map((r) => new Date(r.when + 'T12:00:00'));
+const statY = done.filter((d) => d.getFullYear() === now.getFullYear()).length;
+const statQ = done.filter((d) => d.getFullYear() === now.getFullYear() && qOf(d) === qOf(now)).length;
+const chip = (st) => st === 3 ? 'font-size: 13px; font-weight: 500; color: #FFFFFF; background: #7A5C24; border-radius: 20px; padding: 6px 12px' : st === 0 ? 'font-size: 13px; font-weight: 500; color: #566070; background: #ECE8DD; border-radius: 20px; padding: 6px 12px' : 'font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px';
+const detailOf = (r) => r.org + ' · ' + (r.stage === 0 ? 'Link created ' + fmt(r.sent) + ', not yet clicked' : r.stage === 1 ? 'Registered ' + fmt(r.when) : r.stage === 2 ? 'First quote ' + fmt(r.when) : 'Transacted ' + fmt(r.when));
+const advance = (id) => () => { const refs = this.state.refs.map((r) => r.id === id ? { ...r, stage: r.stage + 1, when: new Date().toISOString().slice(0, 10) } : r); this.saveRefs(refs); this.setState({ refs }); };
+const refs = this.state.refs.map((r) => ({
+name: r.name, detail: detailOf(r), status: labels[r.stage], chipStyle: chip(r.stage),
+steps: labels.map((l, i) => ({ text: l, bar: 'height: 6px; border-radius: 3px; background: ' + (i <= r.stage ? (r.stage === 0 ? '#C9B98F' : '#7A5C24') : '#E3DCCB'), label: 'font-size: 12px; line-height: 1.3; color: ' + (i === r.stage ? '#1B2433' : '#8A8F99') + (i === r.stage ? '; font-weight: 600' : '') })),
+canAdvance: r.stage < 3, advance: advance(r.id)
+}));
+const first = (this.state.refName || '').trim().split(' ')[0] || 'there';
+const mailto = 'mailto:' + encodeURIComponent((this.state.refEmail || '').trim()).replace('%40', '@') + '?subject=' + encodeURIComponent('An introduction to VoleAlti') + '&body=' + encodeURIComponent(this.state.refBody);
+const copyText = (txt, what) => {
+const fallback = () => { try { const ta = document.createElement('textarea'); ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); } catch (e) {} };
+try { navigator.clipboard.writeText(txt).catch(fallback); } catch (e) { fallback(); }
+this.setState({ copied: what });
+setTimeout(() => this.setState({ copied: '' }), 2000);
+};
+const v = this.state.refView;
+return {
+sections: list.map(([id, label]) => ({ label, style: id === s ? on : off, pick: () => this.setState({ sec: id }) })),
+showUsers: s === 'users', showPay: s === 'pay', showInvoicing: s === 'invoicing', showHistory: s === 'history', showAccount: s === 'account', showReferrals: s === 'referrals',
+refList: v === 'list', refNew: v === 'new', refLink: v === 'link',
+refs, statQ, statY, statAll: this.state.refs.length,
+startRefer: () => this.setState({ refView: 'new', refName: '', refEmail: '', refErr: false }),
+toList: () => this.setState({ refView: 'list' }),
+resetRefs: () => { try { sessionStorage.removeItem('va_demo_refs'); } catch (e) {} window.location.reload(); },
+refName: this.state.refName, refEmail: this.state.refEmail, refErr: this.state.refErr,
+setName: (e) => this.setState({ refName: e.target.value, refErr: false }),
+setEmail: (e) => this.setState({ refEmail: e.target.value }),
+createRef: () => {
+const name = (this.state.refName || '').trim();
+if (!name) { this.setState({ refErr: true }); return; }
+const code = 'VA-' + Math.random().toString(36).slice(2, 8).toUpperCase();
+const url = 'https://volealti.com/join/' + code;
+const fn = name.split(' ')[0];
+const body = 'Hi ' + fn + ',\n\nI use VoleAlti to arrange private aviation, and I thought it might be useful for you too. Their team handles every trip personally, with a named contact on each one.\n\nYou can set up your own account here:\n' + url + '\n\nHappy to tell you more about how it works.\n\n[Your name]';
+const refs = [{ id: Date.now(), name, org: '[Organisation]', stage: 0, sent: new Date().toISOString().slice(0, 10), when: '' }].concat(this.state.refs);
+this.saveRefs(refs);
+this.setState({ refView: 'link', refUrl: url, refBody: body, copied: '', mailHint: false, refs });
+},
+refUrl: this.state.refUrl, refBody: this.state.refBody, mailto,
+mailHint: this.state.mailHint,
+mailClick: () => { setTimeout(() => this.setState({ mailHint: true }), 600); },
+gmailUrl: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent((this.state.refEmail || '').trim()) + '&su=' + encodeURIComponent('An introduction to VoleAlti') + '&body=' + encodeURIComponent(this.state.refBody),
+outlookUrl: 'https://outlook.office.com/mail/deeplink/compose?to=' + encodeURIComponent((this.state.refEmail || '').trim()) + '&subject=' + encodeURIComponent('An introduction to VoleAlti') + '&body=' + encodeURIComponent(this.state.refBody),
+setBody: (e) => this.setState({ refBody: e.target.value }),
+copyLink: () => copyText(this.state.refUrl, 'link'),
+copyMsg: () => copyText('Subject: An introduction to VoleAlti\n\n' + this.state.refBody, 'msg'),
+copyLinkLabel: this.state.copied === 'link' ? 'Copied' : 'Copy link',
+copyMsgLabel: this.state.copied === 'msg' ? 'Copied' : 'Copy message'
+};
+}
+}
+</script>
+<script src="./dc-lite.js"></script>
+</body>
+</html>

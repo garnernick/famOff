@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>EA Portal home</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F3EA}
+@media (max-width: 640px){.hamb{display:inline-flex !important;align-items:center;justify-content:center;width:44px;height:44px;cursor:pointer;margin-right:-10px}.mainnav{display:none !important;flex:1 1 100%;flex-direction:column;align-items:stretch !important;gap:0 !important;border-top:1px solid #24324C}.navtoggle:checked ~ .mainnav{display:flex !important}.mainnav a{display:flex;align-items:center;min-height:48px;padding:0 4px;border-bottom:1px solid #1B2A44}.mainnav a[href="Main.dc.html"]{justify-content:center;margin:14px 0 4px;border:1px solid #3A4966 !important}.fld{flex:1 1 100% !important}.snav{flex:1 1 100% !important;flex-direction:row !important;overflow-x:auto;gap:6px !important}.snav button{flex:none;white-space:nowrap;padding:0 12px !important;font-size:15px !important}.ovwrap{padding:16px !important}.ovcard{padding:20px !important;max-height:calc(100vh - 32px) !important}}
+input[type=date],input[type=datetime-local]{color-scheme:light}
+input[type=date]::-webkit-datetime-edit,input[type=date]::-webkit-datetime-edit-fields-wrapper,input[type=date]::-webkit-datetime-edit-text,input[type=date]::-webkit-datetime-edit-day-field,input[type=date]::-webkit-datetime-edit-month-field,input[type=date]::-webkit-datetime-edit-year-field,input[type=datetime-local]::-webkit-datetime-edit,input[type=datetime-local]::-webkit-datetime-edit-fields-wrapper,input[type=datetime-local]::-webkit-datetime-edit-text,input[type=datetime-local]::-webkit-datetime-edit-day-field,input[type=datetime-local]::-webkit-datetime-edit-month-field,input[type=datetime-local]::-webkit-datetime-edit-year-field,input[type=datetime-local]::-webkit-datetime-edit-hour-field,input[type=datetime-local]::-webkit-datetime-edit-minute-field{color:inherit}
+input[type=date]::-webkit-calendar-picker-indicator,input[type=datetime-local]::-webkit-calendar-picker-indicator{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+a{color:inherit}
+</style>
+
+<script src="./airports-data.js"></script>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/plain" id="dc-template">
+<div style="font-family: 'Jost', system-ui, sans-serif; color: #1B2433; background: #F7F3EA">
+
+<div style="background: #0E1A2E; color: #F7F3EA">
+<div style="max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<a href="Home.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="36" height="36" viewBox="0 0 40 40" role="img" aria-label="VoleAlti monogram"><circle cx="20" cy="20" r="18" fill="none" stroke="#C9A96B" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#C9A96B">VA</text></svg>
+<span style="font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.14em">VOLEALTI</span>
+</a>
+<input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Menu" style="position: absolute; opacity: 0; width: 1px; height: 1px">
+<label for="navtoggle" class="hamb" style="display: none" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F7F3EA" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<nav class="mainnav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; font-size: 15px">
+<a href="Home.dc.html" style="text-decoration: none; color: #C9A96B; font-weight: 500">Home</a>
+<a href="Calendar.dc.html" style="text-decoration: none; color: #D9DEE8">Calendar</a>
+<a href="#search" style="text-decoration: none; color: #D9DEE8">Search</a>
+<a href="#trips" style="text-decoration: none; color: #D9DEE8">Trips</a>
+<a href="Account.dc.html" style="text-decoration: none; color: #D9DEE8">Account</a>
+<a href="Main.dc.html" style="text-decoration: none; color: #B9C2D2; font-size: 14px; border: 1px solid #3A4966; border-radius: 6px; padding: 10px 14px">Sign out</a>
+</nav>
+</div>
+</div>
+
+<div style="max-width: 1120px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 36px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 32px; color: #0E1A2E">{{greeting}}</h1>
+<span style="font-size: 16px; color: #566070">Here is what needs you today.</span>
+</div>
+<span style="font-size: 13px; color: #566070; border: 1px dashed #CFC7B3; border-radius: 6px; padding: 8px 12px">Draft with sample content</span>
+</div>
+
+<div id="search" style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Search</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{showSoon}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #1B2433">Coming soon. Feel free to <a href="mailto:cp@volealti.com" style="color: #7A5C24; text-decoration: none; border-bottom: 1px solid #C9A96B">email us</a> in the meantime.</p>
+</sc-if>
+<sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
+<sc-if value="{{showTrip}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{tripTypes}}" as="tt" hint-placeholder-count="3">
+<button onClick="{{tt.pick}}" style="{{tt.style}}">{{tt.label}}</button>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end">
+<sc-for list="{{fields}}" as="f" hint-placeholder-count="4">
+<sc-if value="{{f.isBreak}}" hint-placeholder-val="{{ false }}"><div style="flex: 0 0 100%; height: 0"></div></sc-if>
+<sc-if value="{{f.isField}}" hint-placeholder-val="{{ true }}"><label class="fld" style="{{f.lstyle}}">{{f.label}}<sc-if value="{{f.isText}}" hint-placeholder-val="{{ true }}"><input type="text" autocomplete="off" value="{{f.value}}" placeholder="{{f.ph}}" onInput="{{f.input}}" onFocus="{{f.focus}}" onBlur="{{f.blur}}" style="box-sizing: border-box; min-height: 48px; padding: 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"></sc-if>
+<sc-if value="{{f.isNum}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><input type="text" inputmode="numeric" maxlength="2" autocomplete="off" aria-label="{{f.label}} (1 to 16)" value="{{f.numValue}}" placeholder="1" onInput="{{f.input}}" style="box-sizing: border-box; width: 100%; min-height: 48px; padding: 0 40px 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433"><button type="button" onClick="{{f.numUp}}" aria-label="Add a passenger" style="position: absolute; right: 6px; top: 4px; width: 28px; height: 20px; padding: 0; border: 0; background: transparent; color: #7A5C24; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" onClick="{{f.numDown}}" aria-label="Remove a passenger" style="position: absolute; right: 6px; bottom: 4px; width: 28px; height: 20px; padding: 0; border: 0; background: transparent; color: #7A5C24; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></span></sc-if>
+<sc-if value="{{f.isSelect}}" hint-placeholder-val="{{ false }}"><select aria-label="{{f.label}}" onChange="{{f.input}}" style="{{f.sstyle}}">
+<sc-for list="{{f.choices}}" as="c" hint-placeholder-count="4">
+<option value="{{c.v}}" selected="{{c.sel}}">{{c.v}}</option>
+</sc-for>
+</select></sc-if>
+<sc-if value="{{f.isDate}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><input type="{{f.dtype}}" value="{{f.value}}" onInput="{{f.input}}" aria-label="{{f.label}}" style="{{f.dstyle}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5C24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; right: 14px; top: 14px; pointer-events: none"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span></sc-if>
+<sc-if value="{{f.showList}}" hint-placeholder-val="{{ false }}">
+<div role="listbox" style="position: absolute; z-index: 5; top: 82px; left: 0; right: 0; min-width: 260px; background: #FFFFFF; border: 1px solid #CFC7B3; border-radius: 6px; box-shadow: 0 8px 24px rgba(14,26,46,0.12); overflow: hidden">
+<sc-for list="{{f.options}}" as="o" hint-placeholder-count="4">
+<div role="option" onMouseDown="{{o.pick}}" style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 44px; box-sizing: border-box; padding: 10px 14px; border-bottom: 1px solid #F1EBDD; cursor: pointer"><span style="display: flex; flex-direction: column; gap: 2px; font-size: 15px; color: #1B2433">{{o.title}}<span style="font-size: 12px; color: #566070">{{o.sub}}</span></span><span style="font-size: 12px; letter-spacing: 0.06em; color: #7A5C24; white-space: nowrap">{{o.codes}}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</label></sc-if>
+</sc-for>
+</div>
+<sc-if value="{{showLegRow}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px"><sc-if value="{{showAddLeg}}" hint-placeholder-val="{{ true }}"><button onClick="{{addLeg}}" style="min-height: 44px; padding: 0; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer">+ Add another leg</button></sc-if><sc-if value="{{canRemoveLeg}}" hint-placeholder-val="{{ false }}"><button onClick="{{removeLeg}}" style="min-height: 44px; padding: 0; border: 0; background: transparent; color: #566070; font: inherit; font-size: 14px; cursor: pointer">Remove leg</button></sc-if><sc-if value="{{atLegLimit}}" hint-placeholder-val="{{ false }}"><span style="font-size: 14px; color: #7A5C24">Leg Limit Reached - please email us and we'll call you to discuss this further.</span></sc-if></div>
+</sc-if>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070">Additional requirements / special requests<textarea rows="3" placeholder="Anything we should know, such as catering, pets or a must-have feature" style="box-sizing: border-box; width: 100%; padding: 12px 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433; resize: vertical"></textarea></label>
+<div><a href="{{findHref}}" style="display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 48px; padding: 0 32px; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font-weight: 600; font-size: 16px; text-decoration: none">{{findLabel}}</a></div><sc-if value="{{showTrip}}" hint-placeholder-val="{{ true }}">
+<span style="font-size: 13px; color: #566070">More than 16 passengers? <a href="mailto:info@volealti.com?subject=Charter%20for%20more%20than%2016%20passengers" style="color: #7A5C24; text-decoration: none; border-bottom: 1px solid #C9A96B">Message us here.</a></span>
+</sc-if>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start">
+
+<div style="flex: 1 1 480px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<button onClick="{{toggleQ}}" style="display: inline-flex; align-items: baseline; gap: 10px; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left"><sc-if value="{{qOpen}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#7A5C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; align-self: center"><path d="M3 6l5 5 5-5"/></svg></sc-if><sc-if value="{{qClosed}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#7A5C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; align-self: center"><path d="M6 3l5 5-5 5"/></svg></sc-if><h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Quotes open</h2></button>
+</div>
+<sc-if value="{{qOpen}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 10px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 17px; font-weight: 600">Farnborough to Nice</span><span style="font-size: 14px; color: #566070">Fri 12 Dec, 4 passengers · held until [time]</span></div>
+<div style="display: flex; align-items: center; gap: 14px"><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">Awaiting your decision</span><button onClick="{{openQ12}}" style="padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; font-size: 14px; color: #0E1A2E; font-weight: 600">Review</button></div>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 10px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 17px; font-weight: 600">Teterboro to Luton</span><span style="font-size: 14px; color: #566070">Tue 16 Dec, 2 passengers</span></div>
+<div style="display: flex; align-items: center; gap: 14px"><span style="font-size: 13px; font-weight: 500; color: #566070; background: #ECE8DD; border-radius: 20px; padding: 6px 12px">Quotes being prepared</span><button onClick="{{openQ16}}" style="padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; font-size: 14px; color: #0E1A2E; font-weight: 600">View</button></div>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 10px; padding: 20px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 17px; font-weight: 600">Luton to Geneva</span><span style="font-size: 14px; color: #566070">Sat 20 Dec, 6 passengers · held until [time]</span></div>
+<div style="display: flex; align-items: center; gap: 14px"><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">Awaiting your decision</span><button onClick="{{openQ20}}" style="padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; font-size: 14px; color: #0E1A2E; font-weight: 600">Review</button></div>
+</div>
+</sc-if>
+</div>
+
+<div id="trips" style="flex: 1 1 340px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<button onClick="{{toggleT}}" style="display: inline-flex; align-items: baseline; gap: 10px; padding: 0; border: 0; background: transparent; cursor: pointer; text-align: left"><sc-if value="{{tOpen}}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#7A5C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; align-self: center"><path d="M3 6l5 5 5-5"/></svg></sc-if><sc-if value="{{tClosed}}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#7A5C24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; align-self: center"><path d="M6 3l5 5-5 5"/></svg></sc-if><h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Upcoming trips</h2></button>
+</div>
+<sc-if value="{{tOpen}}" hint-placeholder-val="{{ false }}">
+<div style="background: #0E1A2E; color: #F7F3EA; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; letter-spacing: 0.12em; color: #C9A96B">FRI 5 DEC</span>
+<span style="font-size: 18px; font-weight: 600">Luton to Geneva</span>
+<span style="font-size: 14px; color: #B9C2D2">Confirmed, departs 09:30</span>
+<span style="font-size: 14px; color: #B9C2D2">Your contact: [Name], [direct line]</span>
+<button onClick="{{openT5}}" style="align-self: flex-start; text-align: left; padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; margin-top: 8px; font-size: 14px; color: #C9A96B; font-weight: 500">Trip details</button>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 13px; letter-spacing: 0.12em; color: #7A5C24">TUE 9 DEC</span>
+<span style="font-size: 18px; font-weight: 600">Geneva to Luton</span>
+<span style="font-size: 14px; color: #566070">Confirmed, departs 17:00</span>
+<span style="font-size: 14px; color: #566070">Your contact: [Name], [direct line]</span>
+<button onClick="{{openT9}}" style="align-self: flex-start; text-align: left; padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; margin-top: 8px; font-size: 14px; color: #0E1A2E; font-weight: 500">Trip details</button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</div>
+
+<sc-if value="{{ovShow}}" hint-placeholder-val="{{ false }}">
+<div class="ovwrap" onClick="{{ovBackdrop}}" style="position: fixed; inset: 0; z-index: 50; background: rgba(14,26,46,0.55); display: flex; align-items: flex-start; justify-content: center; padding: 60px 20px 20px; box-sizing: border-box">
+<div class="ovcard" role="dialog" aria-modal="true" style="background: #FFFFFF; border-radius: 12px; width: 100%; max-width: 640px; max-height: calc(100vh - 120px); overflow: auto; padding: 28px; display: flex; flex-direction: column; gap: 14px; box-sizing: border-box; box-shadow: 0 20px 60px rgba(14,26,46,0.35)">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px"><div style="display: flex; flex-direction: column; gap: 8px"><h3 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">{{ov.title}}</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px; align-self: flex-start">{{ov.chip}}</span></div>
+<button onClick="{{ovClose}}" aria-label="Close" style="width: 40px; height: 40px; border: 0; border-radius: 20px; background: #F1ECDD; color: #1B2433; font: inherit; font-size: 20px; line-height: 1; cursor: pointer">&times;</button></div>
+<sc-if value="{{ovQuote}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 14px; color: #566070">{{ov.intro}}</span>
+<sc-for list="{{ovOpts}}" as="q" hint-placeholder-count="3">
+<div style="{{q.box}}"><div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 17px; font-weight: 600">{{q.name}}</span><span style="font-size: 14px; color: #566070">{{q.sub}}</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><span style="font-size: 20px; font-weight: 600">{{q.price}}</span><button onClick="{{q.pick}}" style="{{q.btn}}">{{q.label}}</button></div></div>
+</sc-for>
+<sc-if value="{{ovDone}}" hint-placeholder-val="{{ false }}"><div style="background: #F1E7D0; border-radius: 8px; padding: 14px 16px; font-size: 15px">{{ovMsg}}</div></sc-if>
+</sc-if>
+<sc-if value="{{ovRequest}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ov.rows}}" as="r" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for>
+<h4 style="margin: 14px 0 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 17px; color: #0E1A2E">Progress</h4>
+<sc-for list="{{ov.timeline}}" as="t" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{t.k}}</span><span style="text-align: right">{{t.v}}</span></div></sc-for>
+</sc-if>
+<sc-if value="{{ovTrip}}" hint-placeholder-val="{{ false }}">
+<sc-for list="{{ov.sections}}" as="sec" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column"><h4 style="margin: 14px 0 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 17px; color: #0E1A2E; margin-bottom: 4px">{{sec.h}}</h4>
+<sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for></div>
+</sc-for>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px"><button onClick="{{ovClose}}" style="min-height: 44px; padding: 0 22px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-weight: 500; cursor: pointer">Close</button></div>
+</div>
+</div>
+</sc-if>
+
+</div>
+</script>
+<script type="text/plain" id="dc-logic">
+class Component extends DCLogic {
+state = { ov: null, picks: {}, qOpen: false, tOpen: false, tab: 'jet', seed: Math.random(), trip: 'return', legs: 2, vals: {}, open: '' };
+airports = (window.__AIRPORTS || []).map((s) => s.split('|'));
+metros = [['LON','London',51.507,-0.128,60],['NYC','New York',40.713,-74.006,60],['PAR','Paris',48.857,2.352,50],['MIL','Milan',45.464,9.19,55],['ROM','Rome',41.903,12.496,45],['WAS','Washington',38.907,-77.037,50],['CHI','Chicago',41.878,-87.63,50],['MOW','Moscow',55.756,37.617,60],['TYO','Tokyo',35.68,139.69,60],['STO','Stockholm',59.33,18.07,50],['BUH','Bucharest',44.43,26.1,40],['OSA','Osaka',34.69,135.5,50],['RIO','Rio de Janeiro',-22.907,-43.173,45],['SAO','Sao Paulo',-23.55,-46.633,50],['BUE','Buenos Aires',-34.604,-58.382,50],['SEL','Seoul',37.566,126.978,50],['BJS','Beijing',39.904,116.407,60],['JKT','Jakarta',-6.2,106.82,40],['REK','Reykjavik',64.147,-21.94,60],['DTT','Detroit',42.33,-83.05,50],['YTO','Toronto',43.65,-79.38,50],['YMQ','Montreal',45.5,-73.57,50],['BER','Berlin',52.52,13.405,40]];
+dist(la1, lo1, la2, lo2) {
+const R = Math.PI / 180;
+const a = Math.sin((la2 - la1) * R / 2) ** 2 + Math.cos(la1 * R) * Math.cos(la2 * R) * Math.sin((lo2 - lo1) * R / 2) ** 2;
+return 12742 * Math.asin(Math.sqrt(a));
+}
+metroMembers(m) {
+this.mm = this.mm || {};
+if (!this.mm[m[0]]) this.mm[m[0]] = this.airports.filter((a) => a[3] && this.dist(m[2], m[3], +a[5], +a[6]) <= m[4]).sort((x, y) => x[7] - y[7]).map((a) => a[3]);
+return this.mm[m[0]];
+}
+matchAirports(q) {
+const s = q.trim().toLowerCase();
+if (!s) return [];
+const out = [];
+this.metros.forEach((m) => {
+if (m[0].toLowerCase() === s || m[1].toLowerCase().startsWith(s)) {
+const mem = this.metroMembers(m);
+out.push({ sc: 0, t: 0, title: m[1] + ', all airports', sub: mem.length + ' airports: ' + mem.slice(0, 8).join(', ') + (mem.length > 8 ? '...' : ''), codes: m[0], value: m[1] + ', all airports (' + m[0] + ')' });
+}
+});
+this.airports.forEach((a) => {
+const ia = a[3].toLowerCase(), ic = a[4].toLowerCase();
+let sc = 9;
+if (ia === s || ic === s) sc = 1;
+else if (s.length > 1 && (ia.startsWith(s) || ic.startsWith(s))) sc = 2;
+else if (a[1].toLowerCase().startsWith(s)) sc = 3;
+else if (s.length > 2 && a[0].toLowerCase().includes(s)) sc = 4;
+if (sc < 9) out.push({ sc, t: +a[7], title: a[0], sub: [a[1], a[2]].filter(Boolean).join(', '), codes: [a[3], a[4]].filter(Boolean).join(' \u00b7 '), value: a[0] + ' (' + (a[3] || a[4]) + ')' });
+});
+out.sort((x, y) => x.sc - y.sc || x.t - y.t || (x.title < y.title ? -1 : 1));
+return out.slice(0, 8);
+}
+renderVals() {
+const contact = 'Sophie Hartley, +44 20 7946 0123';
+const rowsOf = (o) => Object.keys(o).map((k) => ({ k, v: o[k] }));
+const pri = ''; const sec2 = '';
+const details = {
+5: { title: 'Luton to Geneva', chip: 'Confirmed', kind: 'trip',
+rows: [{ k: 'Date', v: 'Sat 5 December' }, { k: 'Departs', v: '09:30 Luton' }, { k: 'Arrives', v: '12:05 Geneva' }, { k: 'Passengers', v: '4' }, { k: 'Aircraft', v: 'Cessna Citation XLS+ (8 seats)' }, { k: 'Your contact', v: contact }, { k: 'Invoice', v: 'INV-2026-0412, GBP 18,450.00, awaiting payment' }],
+inv: { no: 'INV-2026-0412', status: 'Awaiting payment', date: '13 Nov 2026', due: '28 Nov 2026', amt: 'GBP 18,450.00', rows: rowsOf({ 'Issued': '13 November 2026', 'Payment due': '28 November 2026', 'Trip': 'Luton to Geneva, Sat 5 Dec 2026', 'Aircraft': 'Cessna Citation XLS+', 'Charter fee': 'GBP 14,900.00', 'Fuel and handling': 'GBP 2,350.00', 'Airport and navigation fees': 'GBP 690.00', 'VAT': 'GBP 510.00', 'Total due': 'GBP 18,450.00', 'Pay by': 'Bank transfer, reference INV-2026-0412' }) },
+sections: [{ h: 'Flight', rows: rowsOf({ 'Route': 'Luton (EGGW) to Geneva (LSGG)', 'Departs': 'Sat 5 Dec, 09:30 local', 'Arrives': 'Sat 5 Dec, 12:05 local', 'Flight time': '1 h 35 min' }) }, { h: 'Aircraft and crew', rows: rowsOf({ 'Aircraft': 'Cessna Citation XLS+', 'Registration': '[Registration]', 'Crew': 'Two pilots, one cabin attendant' }) }, { h: 'Passengers', rows: rowsOf({ 'Passenger 1': '[Lead passenger] (principal)', 'Passenger 2': '[Passenger]', 'Passenger 3': '[Passenger]', 'Passenger 4': '[Passenger]' }) }, { h: 'On the ground', rows: rowsOf({ 'Luton': 'Terminal [FBO], arrive 08:45', 'Geneva': 'Terminal [FBO], car waiting', 'Catering': 'Cold platter, soft drinks, still and sparkling water', 'Documents': 'Passports for all passengers' }) }],
+actions: [] },
+9: { title: 'Geneva to Luton', chip: 'Confirmed', kind: 'trip',
+rows: [{ k: 'Date', v: 'Tue 9 December' }, { k: 'Departs', v: '17:00 Geneva' }, { k: 'Arrives', v: '17:40 Luton' }, { k: 'Passengers', v: '4' }, { k: 'Aircraft', v: 'Cessna Citation XLS+ (8 seats)' }, { k: 'Your contact', v: contact }, { k: 'Invoice', v: 'INV-2026-0413, GBP 17,900.00, awaiting payment' }],
+inv: { no: 'INV-2026-0413', status: 'Awaiting payment', rows: rowsOf({ 'Issued': '13 November 2026', 'Payment due': '28 November 2026', 'Trip': 'Geneva to Luton, Tue 9 Dec 2026', 'Aircraft': 'Cessna Citation XLS+', 'Charter fee': 'GBP 14,400.00', 'Fuel and handling': 'GBP 2,300.00', 'Airport and navigation fees': 'GBP 690.00', 'VAT': 'GBP 510.00', 'Total due': 'GBP 17,900.00', 'Pay by': 'Bank transfer, reference INV-2026-0413' }) },
+sections: [{ h: 'Flight', rows: rowsOf({ 'Route': 'Geneva (LSGG) to Luton (EGGW)', 'Departs': 'Tue 9 Dec, 17:00 local', 'Arrives': 'Tue 9 Dec, 17:40 local', 'Flight time': '1 h 40 min' }) }, { h: 'Aircraft and crew', rows: rowsOf({ 'Aircraft': 'Cessna Citation XLS+', 'Registration': '[Registration]', 'Crew': 'Two pilots, one cabin attendant' }) }, { h: 'Passengers', rows: rowsOf({ 'Passenger 1': '[Lead passenger] (principal)', 'Passenger 2': '[Passenger]', 'Passenger 3': '[Passenger]', 'Passenger 4': '[Passenger]' }) }, { h: 'On the ground', rows: rowsOf({ 'Geneva': 'Terminal [FBO], arrive 16:15', 'Luton': 'Car to [address]', 'Catering': 'Light supper, soft drinks', 'Documents': 'Passports for all passengers' }) }],
+actions: [] },
+12: { title: 'Farnborough to Nice', chip: 'Awaiting your decision', kind: 'quote',
+rows: [{ k: 'Date', v: 'Fri 12 December' }, { k: 'Passengers', v: '4' }, { k: 'Options', v: '3 quotes from 14,200 GBP' }, { k: 'Held until', v: 'Mon 16 Nov, 17:00 UK' }, { k: 'Your contact', v: contact }],
+quoteIntro: 'Three options for 4 passengers. Prices include fuel, handling and fees. Held until Mon 16 Nov, 17:00 UK.',
+opts: [{ id: 'a', name: 'Embraer Phenom 300E', sub: 'Light jet, 6 seats, 2 h 05 min', price: 'GBP 14,200' }, { id: 'b', name: 'Cessna Citation XLS+', sub: 'Mid-sized, 8 seats, 2 h 00 min', price: 'GBP 16,850' }, { id: 'c', name: 'Bombardier Challenger 350', sub: 'Super-midsize, 9 seats, 1 h 55 min', price: 'GBP 19,400' }],
+actions: [{ label: 'Review quote', style: pri, go: 'quote' }, { label: 'Ask a question', style: sec2, go: 'ask' }] },
+16: { title: 'Teterboro to Luton', chip: 'Quotes being prepared', kind: 'request',
+rows: [{ k: 'Date', v: 'Tue 16 December' }, { k: 'Route', v: 'Teterboro (KTEB) to Luton (EGGW)' }, { k: 'Passengers', v: '2' }, { k: 'Category', v: 'Heavy' }, { k: 'Flexibility', v: '+/- 24 hours' }, { k: 'Reference', v: 'REQ-2026-1187' }, { k: 'Your contact', v: contact }],
+timeline: [{ k: 'Request received', v: 'Wed 11 Nov, 14:20' }, { k: 'Operators approached', v: '6 operators, Wed 11 Nov, 15:05' }, { k: 'Quotes in', v: '2 of 6, so far' }, { k: 'Expected', v: 'Within 2 working hours of the next quote' }],
+actions: [{ label: 'View request', style: sec2, go: 'request' }] },
+20: { title: 'Luton to Geneva', chip: 'Awaiting your decision', kind: 'quote',
+rows: [{ k: 'Date', v: 'Sun 20 December' }, { k: 'Passengers', v: '6' }, { k: 'Options', v: '2 quotes from 21,300 GBP' }, { k: 'Held until', v: 'Thu 19 Nov, 12:00 UK' }, { k: 'Your contact', v: contact }],
+quoteIntro: 'Two options for 6 passengers. Prices include fuel, handling and fees. Held until Thu 19 Nov, 12:00 UK.',
+opts: [{ id: 'a', name: 'Bombardier Challenger 350', sub: 'Super-midsize, 9 seats, 1 h 35 min', price: 'GBP 21,300' }, { id: 'b', name: 'Dassault Falcon 2000', sub: 'Large cabin, 10 seats, 1 h 30 min', price: 'GBP 24,900' }],
+actions: [{ label: 'Review quote', style: pri, go: 'quote' }, { label: 'Ask a question', style: sec2, go: 'ask' }] }
+};
+const ovKey = this.state.ov;
+const ovDay = ovKey ? +ovKey.slice(1) : null;
+const ovd = ovKey ? details[ovDay] : null;
+const ovPick = ovKey ? (this.state.picks[ovDay] || '') : '';
+const optBox = 'border: 1px solid #E3DCCB; border-radius: 8px; padding: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px';
+const ovOpts = ovd && ovd.opts ? ovd.opts.map((o) => ({ name: o.name, sub: o.sub, price: o.price,
+box: ovPick === o.id ? optBox + '; border: 2px solid #7A5C24; background: #FBF6EA' : optBox,
+btn: ovPick === o.id ? 'min-height: 44px; padding: 0 20px; border: 0; border-radius: 6px; background: #7A5C24; color: #FFFFFF; font: inherit; font-weight: 600; cursor: default' : 'min-height: 44px; padding: 0 20px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer',
+label: ovPick === o.id ? 'Accepted' : 'Accept quote',
+pick: () => this.setState({ picks: { ...this.state.picks, [ovDay]: o.id } }) })) : [];
+const ovChosen = ovd && ovd.opts ? ovd.opts.find((o) => o.id === ovPick) : null;
+const openOv = (k) => () => this.setState({ ov: k });
+const hr = new Date().getHours();
+const part = hr < 12 ? 'morning' : hr < 18 ? 'afternoon' : 'evening';
+const bank = [
+'Good ' + part + ', [Name]',
+'Good ' + part + ', [Name]. Welcome back',
+'Welcome back, [Name]',
+'Nice to see you back, [Name]',
+'Good to see you again, [Name]',
+'Hello again, [Name]'
+];
+const greeting = bank[Math.floor(this.state.seed * bank.length)];
+const defs = [
+{ id: 'jet', label: 'Private Jet Charter', note: 'Empty legs that fit your dates are flagged in the results.',
+fields: [{ label: 'From', ph: 'Airport or city' }, { label: 'To', ph: 'Airport or city' }, { label: 'Date', ph: 'Select date' }, { label: 'Passengers', ph: '1' }] },
+{ id: 'limo', label: 'Limousine', note: 'Add a transfer to any trip on your account.',
+fields: [{ label: 'Pick-up', ph: 'Address or airport' }, { label: 'Drop-off', ph: 'Address or airport' }, { label: 'Date and time', ph: 'Select' }, { label: 'Passengers', ph: '1' }, { label: 'Vehicle Class', select: true, def: 'Any class', opts: ['Any class', 'Executive', 'Luxury', 'Luxury Van'] }] },
+{ id: 'villa', label: 'Private Villas', note: 'Find a villa to match the dates of the trip.',
+fields: [{ label: 'Destination', ph: 'Region or town' }, { label: 'Check-in', ph: 'Select date' }, { label: 'Check-out', ph: 'Select date' }, { label: 'Guests', ph: '2' }] },
+{ id: 'yacht', label: 'Yacht Charter', note: 'Tell us the region and dates and we will come back with options.',
+fields: [{ label: 'Region', ph: 'Where to cruise' }, { label: 'Start date', ph: 'Select date' }, { label: 'Days', ph: '7' }, { label: 'Guests', ph: '4' }] },
+{ id: 'cp', label: 'Close Protection', note: '',
+fields: [{ label: 'Location', ph: 'City or address' }, { label: 'Start date', ph: 'Select date' }, { label: 'Duration', ph: 'Hours or days' }, { label: 'Team size', ph: '1' }] }
+];
+const cur = defs.find((d) => d.id === this.state.tab);
+const isJet = cur.id === 'jet';
+const trip = this.state.trip;
+if (isJet) {
+const ap = 'City, airport, IATA or ICAO';
+if (trip === 'multi') {
+const f = [];
+for (let i = 1; i <= this.state.legs; i++) {
+f.push({ label: 'Leg ' + i + ' from', ph: ap, ac: true, grow: true }, { label: 'Leg ' + i + ' to', ph: ap, ac: true, grow: true }, { label: 'Leg ' + i + ' date', ph: 'Select date', w: 190 }, { brk: true, label: 'brk' + i });
+}
+f.push({ label: 'Passengers', ph: '1', w: 130, num: true }, { label: 'Flexibility', select: true, w: 190, def: 'Exact dates', opts: ['Exact dates', '± 24 hours', '± 48 hours', '± 72 hours'] }, { label: 'Know the category you want?', select: true, w: 230, def: 'Any category', opts: ['Any category', 'Entry Level', 'Light Jet', 'Mid-sized', 'Heavy', 'ULR'] });
+cur.fields = f;
+} else if (trip === 'return') {
+cur.fields = [{ label: 'From', ph: ap, ac: true, grow: true }, { label: 'To', ph: ap, ac: true, grow: true }, { label: 'Passengers', ph: '1', w: 130, num: true }, { brk: true, label: 'brk1' }, { label: 'Depart', ph: 'Select date', w: 190 }, { label: 'Return', ph: 'Select date', w: 190 }, { label: 'Flexibility', select: true, w: 190, def: 'Exact dates', opts: ['Exact dates', '± 24 hours', '± 48 hours', '± 72 hours'] }, { label: 'Know the category you want?', select: true, w: 230, def: 'Any category', opts: ['Any category', 'Entry Level', 'Light Jet', 'Mid-sized', 'Heavy', 'ULR'] }];
+} else {
+cur.fields = [{ label: 'From', ph: ap, ac: true, grow: true }, { label: 'To', ph: ap, ac: true, grow: true }, { label: 'Passengers', ph: '1', w: 130, num: true }, { brk: true, label: 'brk1' }, { label: 'Date', ph: 'Select date', w: 190 }, { label: 'Flexibility', select: true, w: 190, def: 'Exact dates', opts: ['Exact dates', '± 24 hours', '± 48 hours', '± 72 hours'] }, { label: 'Know the category you want?', select: true, w: 230, def: 'Any category', opts: ['Any category', 'Entry Level', 'Light Jet', 'Mid-sized', 'Heavy', 'ULR'] }];
+}
+}
+const tripDefs = [{ id: 'return', label: 'Return' }, { id: 'multi', label: 'Multi-leg' }, { id: 'oneway', label: 'One-way' }];
+const on = 'min-height: 44px; padding: 0 18px; border-radius: 6px; border: 1px solid #0E1A2E; background: #0E1A2E; color: #F7F3EA; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer';
+const off = 'min-height: 44px; padding: 0 18px; border-radius: 6px; border: 1px solid #CFC7B3; background: #FFFFFF; color: #1B2433; font: inherit; font-size: 14px; cursor: pointer';
+return {
+greeting,
+showSoon: cur.id === 'cp',
+showForm: cur.id !== 'cp',
+findLabel: isJet ? 'Find Flights' : 'Search',
+findHref: isJet ? 'Confirmation.dc.html' : '#search',
+showTrip: isJet,
+tripTypes: tripDefs.map((t) => ({ label: t.label, style: t.id === trip ? on : off, pick: () => this.setState({ trip: t.id }) })),
+qOpen: this.state.qOpen, qClosed: !this.state.qOpen, tOpen: this.state.tOpen, tClosed: !this.state.tOpen,
+ovShow: !!ovd,
+ov: ovd ? { title: ovd.title, chip: ovd.kind === 'trip' ? 'Confirmed' : ovd.chip, intro: ovd.quoteIntro || '', rows: ovd.rows, timeline: ovd.timeline || [], sections: ovd.sections || [] } : { title: '', chip: '', intro: '', rows: [], timeline: [], sections: [] },
+ovQuote: !!ovd && ovd.kind === 'quote',
+ovRequest: !!ovd && ovd.kind === 'request',
+ovTrip: !!ovd && ovd.kind === 'trip',
+ovOpts,
+ovDone: !!ovChosen,
+ovMsg: ovChosen ? 'Quote accepted: ' + ovChosen.name + ' at ' + ovChosen.price + '. Sophie Hartley will confirm within 2 working hours and send your invoice.' : '',
+ovClose: () => this.setState({ ov: null }),
+ovBackdrop: (e) => { if (e && e.target === e.currentTarget) this.setState({ ov: null }); },
+openQ12: openOv('q12'), openQ16: openOv('q16'), openQ20: openOv('q20'), openT5: openOv('t5'), openT9: openOv('t9'),
+toggleQ: () => this.setState({ qOpen: !this.state.qOpen }),
+toggleT: () => this.setState({ tOpen: !this.state.tOpen }),
+showLegRow: isJet && trip === 'multi',
+showAddLeg: this.state.legs < 12,
+canRemoveLeg: this.state.legs > 2,
+atLegLimit: this.state.legs >= 12,
+addLeg: () => this.setState({ legs: Math.min(12, this.state.legs + 1) }),
+removeLeg: () => this.setState({ legs: Math.max(2, this.state.legs - 1) }),
+tabs: defs.map((d) => ({ label: d.label, style: d.id === this.state.tab ? on : off, pick: () => this.setState({ tab: d.id }) })),
+fields: cur.fields.map((f) => {
+const key = cur.id + '|' + f.label;
+const value = this.state.vals[key] || '';
+const opts = f.ac && this.state.open === key ? this.matchAirports(value) : [];
+return {
+label: f.label,
+ph: f.ph,
+isDate: /date|depart|^return$|check-/i.test(f.label) && !f.select,
+isText: !/date|depart|^return$|check-/i.test(f.label) && !f.select && !f.num,
+isNum: !!f.num,
+numValue: value,
+sstyle: 'box-sizing: border-box; width: 100%; min-height: 48px; padding: 0 12px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; cursor: pointer; color: ' + (value && value !== f.def ? '#1B2433' : '#757575'),
+numUp: () => this.setState({ vals: { ...this.state.vals, [key]: String(Math.min(16, (parseInt(value, 10) || 1) + 1)) } }),
+numDown: () => this.setState({ vals: { ...this.state.vals, [key]: String(Math.max(1, (parseInt(value, 10) || 1) - 1)) } }),
+isSelect: !!f.select,
+isBreak: !!f.brk,
+isField: !f.brk,
+lstyle: 'position: relative; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070; flex: ' + (f.grow ? '1 1 220px' : f.w ? '0 1 ' + f.w + 'px' : '1 1 180px'),
+choices: (f.opts || []).map((v) => ({ v, sel: (value || f.def) === v })),
+dtype: /time/i.test(f.label) ? 'datetime-local' : 'date',
+dstyle: 'position: relative; width: 100%; box-sizing: border-box; min-height: 48px; padding: 0 44px 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; cursor: pointer; color: ' + (value ? '#1B2433' : '#757575'),
+value,
+input: (e) => {
+let v = e.target.value;
+if (f.num) {
+v = v.replace(/\D/g, '');
+if (v !== '') v = String(Math.min(16, Math.max(1, parseInt(v, 10))));
+}
+this.setState({ vals: { ...this.state.vals, [key]: v }, open: key });
+},
+focus: () => { if (f.ac) this.setState({ open: key }); },
+blur: () => { if (this.state.open === key) this.setState({ open: '' }); },
+showList: opts.length > 0,
+options: opts.map((a) => ({
+title: a.title,
+sub: a.sub,
+codes: a.codes,
+pick: () => this.setState({ vals: { ...this.state.vals, [key]: a.value }, open: '' })
+}))
+};
+}),
+tabNote: cur.note
+};
+}
+}
+</script>
+<script src="./dc-lite.js"></script>
+</body>
+</html>

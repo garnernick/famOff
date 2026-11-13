@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0E1A2E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>EA Portal calendar</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F3EA}
+@media (max-width: 640px){.hamb{display:inline-flex !important;align-items:center;justify-content:center;width:44px;height:44px;cursor:pointer;margin-right:-10px}.mainnav{display:none !important;flex:1 1 100%;flex-direction:column;align-items:stretch !important;gap:0 !important;border-top:1px solid #24324C}.navtoggle:checked ~ .mainnav{display:flex !important}.mainnav a{display:flex;align-items:center;min-height:48px;padding:0 4px;border-bottom:1px solid #1B2A44}.mainnav a[href="Main.dc.html"]{justify-content:center;margin:14px 0 4px;border:1px solid #3A4966 !important}.fld{flex:1 1 100% !important}.snav{flex:1 1 100% !important;flex-direction:row !important;overflow-x:auto;gap:6px !important}.snav button{flex:none;white-space:nowrap;padding:0 12px !important;font-size:15px !important}.ovwrap{padding:16px !important}.ovcard{padding:20px !important;max-height:calc(100vh - 32px) !important}}
+a{color:inherit}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/plain" id="dc-template">
+<div style="font-family: 'Jost', system-ui, sans-serif; color: #1B2433; background: #F7F3EA">
+
+<div style="background: #0E1A2E; color: #F7F3EA">
+<div style="max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<a href="Home.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="36" height="36" viewBox="0 0 40 40" role="img" aria-label="VoleAlti monogram"><circle cx="20" cy="20" r="18" fill="none" stroke="#C9A96B" stroke-width="1.5"/><text x="20" y="25" text-anchor="middle" font-family="Cinzel, serif" font-size="14" font-weight="600" fill="#C9A96B">VA</text></svg>
+<span style="font-family: 'Cinzel', serif; font-size: 18px; letter-spacing: 0.14em">VOLEALTI</span>
+</a>
+<input type="checkbox" id="navtoggle" class="navtoggle" aria-label="Menu" style="position: absolute; opacity: 0; width: 1px; height: 1px">
+<label for="navtoggle" class="hamb" style="display: none" aria-label="Open menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F7F3EA" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></label>
+<nav class="mainnav" style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 26px; font-size: 15px">
+<a href="Home.dc.html" style="text-decoration: none; color: #D9DEE8">Home</a>
+<a href="Calendar.dc.html" style="text-decoration: none; color: #C9A96B; font-weight: 500">Calendar</a>
+<a href="Home.dc.html#search" style="text-decoration: none; color: #D9DEE8">Search</a>
+<a href="Home.dc.html#trips" style="text-decoration: none; color: #D9DEE8">Trips</a>
+<a href="Account.dc.html" style="text-decoration: none; color: #D9DEE8">Account</a>
+<a href="Main.dc.html" style="text-decoration: none; color: #B9C2D2; font-size: 14px; border: 1px solid #3A4966; border-radius: 6px; padding: 10px 14px">Sign out</a>
+</nav>
+</div>
+</div>
+
+<div style="max-width: 1120px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+<h1 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 32px; color: #0E1A2E">Calendar</h1>
+<div style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566070">December 2026. Dark days are confirmed trips, outlined days have an open quote.</p>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; font-size: 13px; color: #566070; text-align: center">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+<sc-for list="{{days}}" as="d" hint-placeholder-count="35">
+<div onClick="{{d.pick}}" style="{{d.style}}">{{d.label}}</div>
+</sc-for>
+</div>
+<sc-if value="{{showHint}}" hint-placeholder-val="{{ true }}">
+<span style="font-size: 14px; color: #566070">Select a highlighted day to see the trip or quote.</span>
+</sc-if>
+<sc-if value="{{vSummary}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h3 style="margin: 0; font-size: 20px; font-weight: 600">{{detail.title}}</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">{{detail.chip}}</span></div>
+<div style="display: flex; flex-direction: column"><sc-for list="{{detail.rows}}" as="r" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<sc-for list="{{detail.actions}}" as="a" hint-placeholder-count="2"><button onClick="{{a.go}}" style="{{a.style}}">{{a.label}}</button></sc-for>
+<button onClick="{{closeDetail}}" style="min-height: 44px; padding: 0 16px; border: 0; background: transparent; color: #566070; font: inherit; font-size: 14px; cursor: pointer">Close</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{vInvoice}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h3 style="margin: 0; font-size: 20px; font-weight: 600">Invoice {{inv.no}}</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">{{inv.status}}</span></div>
+<span style="font-size: 14px; color: #566070">{{invNote}}</span>
+<div style="display: flex; flex-direction: column"><sc-for list="{{inv.rows}}" as="r" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for></div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px"><button onClick="{{download}}" style="min-height: 44px; padding: 0 22px; border-radius: 6px; font: inherit; font-weight: 600; cursor: pointer; border: 0; background: #0E1A2E; color: #F7F3EA">Download invoice (PDF) again</button></div>
+<button onClick="{{back}}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; align-self: flex-start">&larr; Back to trip</button>
+</div>
+</sc-if>
+
+<sc-if value="{{vTrip}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h3 style="margin: 0; font-size: 20px; font-weight: 600">{{detail.title}}</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">Full trip details</span></div>
+<sc-for list="{{tripSections}}" as="sec" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column"><h4 style="margin: 14px 0 4px; font-family: 'Cinzel', serif; font-weight: 500; font-size: 17px; color: #0E1A2E">{{sec.h}}</h4>
+<sc-for list="{{sec.rows}}" as="r" hint-placeholder-count="4"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for></div>
+</sc-for>
+<button onClick="{{back}}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; align-self: flex-start">&larr; Back to trip</button>
+</div>
+</sc-if>
+
+<sc-if value="{{vQuote}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h3 style="margin: 0; font-size: 20px; font-weight: 600">{{detail.title}}</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">Awaiting your decision</span></div>
+<span style="font-size: 14px; color: #566070">{{quoteIntro}}</span>
+<sc-for list="{{quoteOpts}}" as="q" hint-placeholder-count="3">
+<div style="{{q.box}}">
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 17px; font-weight: 600">{{q.name}}</span><span style="font-size: 14px; color: #566070">{{q.sub}}</span></div>
+<div style="display: flex; align-items: center; gap: 16px"><span style="font-size: 20px; font-weight: 600">{{q.price}}</span><button onClick="{{q.pick}}" style="{{q.btn}}">{{q.label}}</button></div>
+</div>
+</sc-for>
+<sc-if value="{{quoteDone}}" hint-placeholder-val="{{ false }}"><div style="background: #F1E7D0; border-radius: 8px; padding: 14px 16px; font-size: 15px; color: #1B2433">{{quoteMsg}}</div></sc-if>
+<button onClick="{{back}}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; align-self: flex-start">&larr; Back to trip</button>
+</div>
+</sc-if>
+
+<sc-if value="{{vAsk}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h3 style="margin: 0; font-size: 20px; font-weight: 600">Ask a question</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">{{detail.title}}</span></div>
+<span style="font-size: 14px; color: #566070">Goes straight to {{contact}}.</span>
+<textarea rows="4" placeholder="Your question, for example catering, baggage or timings" style="box-sizing: border-box; width: 100%; padding: 12px 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; color: #1B2433; resize: vertical"></textarea>
+<div style="display: flex; flex-wrap: wrap; gap: 12px"><button onClick="{{send}}" style="min-height: 44px; padding: 0 22px; border-radius: 6px; font: inherit; font-weight: 600; cursor: pointer; border: 0; background: #0E1A2E; color: #F7F3EA">Send question</button></div>
+<sc-if value="{{asked}}" hint-placeholder-val="{{ false }}"><div style="background: #F1E7D0; border-radius: 8px; padding: 14px 16px; font-size: 15px">Sent to {{contact}}. You will hear back within 2 working hours.</div></sc-if>
+<button onClick="{{back}}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; align-self: flex-start">&larr; Back to trip</button>
+</div>
+</sc-if>
+
+<sc-if value="{{vRequest}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px solid #E3DCCB; border-radius: 10px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px"><h3 style="margin: 0; font-size: 20px; font-weight: 600">{{detail.title}}</h3><span style="font-size: 13px; font-weight: 500; color: #7A5C24; background: #F1E7D0; border-radius: 20px; padding: 6px 12px">Quotes being prepared</span></div>
+<div style="display: flex; flex-direction: column"><sc-for list="{{detail.rows}}" as="r" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for></div>
+<h4 style="margin: 14px 0 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 17px; color: #0E1A2E">Progress</h4>
+<div style="display: flex; flex-direction: column"><sc-for list="{{timeline}}" as="r" hint-placeholder-count="5"><div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #EFE9DA; font-size: 15px"><span style="color: #566070">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for></div>
+<button onClick="{{back}}" style="min-height: 44px; padding: 0 4px; border: 0; background: transparent; color: #7A5C24; font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; align-self: flex-start">&larr; Back to trip</button>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+</div>
+</script>
+<script type="text/plain" id="dc-logic">
+class Component extends DCLogic {
+state = (() => {
+let day = null; let view = 'summary';
+try { const m = /^#(\d+)-(trip|quote|request|ask)$/.exec(location.hash || ''); if (m) { day = +m[1]; view = m[2]; } } catch (e) {}
+return { day, view, picks: {}, asked: false };
+})();
+renderVals() {
+const trips = [5, 9];
+const quotes = [12, 16, 20];
+const days = [];
+days.push({ label: '', style: 'min-height: 56px' });
+const pri = 'display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer';
+const sec2 = 'display: inline-flex; align-items: center; min-height: 44px; padding: 0 22px; border-radius: 6px; border: 1px solid #CFC7B3; background: #FFFFFF; color: #1B2433; font: inherit; font-weight: 500; cursor: pointer';
+const contact = 'Sophie Hartley, +44 20 7946 0123';
+const go = (v) => () => this.setState({ view: v, asked: false });
+const rowsOf = (o) => Object.keys(o).map((k) => ({ k, v: o[k] }));
+const details = {
+5: { title: 'Luton to Geneva', chip: 'Confirmed', kind: 'trip',
+rows: [{ k: 'Date', v: 'Sat 5 December' }, { k: 'Departs', v: '09:30 Luton' }, { k: 'Arrives', v: '12:05 Geneva' }, { k: 'Passengers', v: '4' }, { k: 'Aircraft', v: 'Cessna Citation XLS+ (8 seats)' }, { k: 'Your contact', v: contact }, { k: 'Invoice', v: 'INV-2026-0412, GBP 18,450.00, awaiting payment' }],
+inv: { no: 'INV-2026-0412', status: 'Awaiting payment', date: '13 Nov 2026', due: '28 Nov 2026', amt: 'GBP 18,450.00', rows: rowsOf({ 'Issued': '13 November 2026', 'Payment due': '28 November 2026', 'Trip': 'Luton to Geneva, Sat 5 Dec 2026', 'Aircraft': 'Cessna Citation XLS+', 'Charter fee': 'GBP 14,900.00', 'Fuel and handling': 'GBP 2,350.00', 'Airport and navigation fees': 'GBP 690.00', 'VAT': 'GBP 510.00', 'Total due': 'GBP 18,450.00', 'Pay by': 'Bank transfer, reference INV-2026-0412' }) },
+sections: [{ h: 'Flight', rows: rowsOf({ 'Route': 'Luton (EGGW) to Geneva (LSGG)', 'Departs': 'Sat 5 Dec, 09:30 local', 'Arrives': 'Sat 5 Dec, 12:05 local', 'Flight time': '1 h 35 min' }) }, { h: 'Aircraft and crew', rows: rowsOf({ 'Aircraft': 'Cessna Citation XLS+', 'Registration': '[Registration]', 'Crew': 'Two pilots, one cabin attendant' }) }, { h: 'Passengers', rows: rowsOf({ 'Passenger 1': '[Lead passenger] (principal)', 'Passenger 2': '[Passenger]', 'Passenger 3': '[Passenger]', 'Passenger 4': '[Passenger]' }) }, { h: 'On the ground', rows: rowsOf({ 'Luton': 'Terminal [FBO], arrive 08:45', 'Geneva': 'Terminal [FBO], car waiting', 'Catering': 'Cold platter, soft drinks, still and sparkling water', 'Documents': 'Passports for all passengers' }) }],
+actions: [{ label: 'Download invoice (PDF)', style: pri, go: 'download' }, { label: 'Full trip details', style: sec2, go: 'trip' }] },
+9: { title: 'Geneva to Luton', chip: 'Confirmed', kind: 'trip',
+rows: [{ k: 'Date', v: 'Tue 9 December' }, { k: 'Departs', v: '17:00 Geneva' }, { k: 'Arrives', v: '17:40 Luton' }, { k: 'Passengers', v: '4' }, { k: 'Aircraft', v: 'Cessna Citation XLS+ (8 seats)' }, { k: 'Your contact', v: contact }, { k: 'Invoice', v: 'INV-2026-0413, GBP 17,900.00, awaiting payment' }],
+inv: { no: 'INV-2026-0413', status: 'Awaiting payment', rows: rowsOf({ 'Issued': '13 November 2026', 'Payment due': '28 November 2026', 'Trip': 'Geneva to Luton, Tue 9 Dec 2026', 'Aircraft': 'Cessna Citation XLS+', 'Charter fee': 'GBP 14,400.00', 'Fuel and handling': 'GBP 2,300.00', 'Airport and navigation fees': 'GBP 690.00', 'VAT': 'GBP 510.00', 'Total due': 'GBP 17,900.00', 'Pay by': 'Bank transfer, reference INV-2026-0413' }) },
+sections: [{ h: 'Flight', rows: rowsOf({ 'Route': 'Geneva (LSGG) to Luton (EGGW)', 'Departs': 'Tue 9 Dec, 17:00 local', 'Arrives': 'Tue 9 Dec, 17:40 local', 'Flight time': '1 h 40 min' }) }, { h: 'Aircraft and crew', rows: rowsOf({ 'Aircraft': 'Cessna Citation XLS+', 'Registration': '[Registration]', 'Crew': 'Two pilots, one cabin attendant' }) }, { h: 'Passengers', rows: rowsOf({ 'Passenger 1': '[Lead passenger] (principal)', 'Passenger 2': '[Passenger]', 'Passenger 3': '[Passenger]', 'Passenger 4': '[Passenger]' }) }, { h: 'On the ground', rows: rowsOf({ 'Geneva': 'Terminal [FBO], arrive 16:15', 'Luton': 'Car to [address]', 'Catering': 'Light supper, soft drinks', 'Documents': 'Passports for all passengers' }) }],
+actions: [{ label: 'Download invoice (PDF)', style: pri, go: 'download' }, { label: 'Full trip details', style: sec2, go: 'trip' }] },
+12: { title: 'Farnborough to Nice', chip: 'Awaiting your decision', kind: 'quote',
+rows: [{ k: 'Date', v: 'Fri 12 December' }, { k: 'Passengers', v: '4' }, { k: 'Options', v: '3 quotes from 14,200 GBP' }, { k: 'Held until', v: 'Mon 16 Nov, 17:00 UK' }, { k: 'Your contact', v: contact }],
+quoteIntro: 'Three options for 4 passengers. Prices include fuel, handling and fees. Held until Mon 16 Nov, 17:00 UK.',
+opts: [{ id: 'a', name: 'Embraer Phenom 300E', sub: 'Light jet, 6 seats, 2 h 05 min', price: 'GBP 14,200' }, { id: 'b', name: 'Cessna Citation XLS+', sub: 'Mid-sized, 8 seats, 2 h 00 min', price: 'GBP 16,850' }, { id: 'c', name: 'Bombardier Challenger 350', sub: 'Super-midsize, 9 seats, 1 h 55 min', price: 'GBP 19,400' }],
+actions: [{ label: 'Review quote', style: pri, go: 'quote' }, { label: 'Ask a question', style: sec2, go: 'ask' }] },
+16: { title: 'Teterboro to Luton', chip: 'Quotes being prepared', kind: 'request',
+rows: [{ k: 'Date', v: 'Tue 16 December' }, { k: 'Route', v: 'Teterboro (KTEB) to Luton (EGGW)' }, { k: 'Passengers', v: '2' }, { k: 'Category', v: 'Heavy' }, { k: 'Flexibility', v: '+/- 24 hours' }, { k: 'Reference', v: 'REQ-2026-1187' }, { k: 'Your contact', v: contact }],
+timeline: [{ k: 'Request received', v: 'Wed 11 Nov, 14:20' }, { k: 'Operators approached', v: '6 operators, Wed 11 Nov, 15:05' }, { k: 'Quotes in', v: '2 of 6, so far' }, { k: 'Expected', v: 'Within 2 working hours of the next quote' }],
+actions: [{ label: 'View request', style: sec2, go: 'request' }] },
+20: { title: 'Luton to Geneva', chip: 'Awaiting your decision', kind: 'quote',
+rows: [{ k: 'Date', v: 'Sun 20 December' }, { k: 'Passengers', v: '6' }, { k: 'Options', v: '2 quotes from 21,300 GBP' }, { k: 'Held until', v: 'Thu 19 Nov, 12:00 UK' }, { k: 'Your contact', v: contact }],
+quoteIntro: 'Two options for 6 passengers. Prices include fuel, handling and fees. Held until Thu 19 Nov, 12:00 UK.',
+opts: [{ id: 'a', name: 'Bombardier Challenger 350', sub: 'Super-midsize, 9 seats, 1 h 35 min', price: 'GBP 21,300' }, { id: 'b', name: 'Dassault Falcon 2000', sub: 'Large cabin, 10 seats, 1 h 30 min', price: 'GBP 24,900' }],
+actions: [{ label: 'Review quote', style: pri, go: 'quote' }, { label: 'Ask a question', style: sec2, go: 'ask' }] }
+};
+const day = this.state.day;
+const dd = details[day];
+const view = this.state.view;
+const pdf = (lines) => {
+const esc = (s) => String(s).replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+let y = 790;
+let content = 'BT /F1 18 Tf 50 ' + y + ' Td (' + esc(lines[0]) + ') Tj ET\n';
+lines.slice(1).forEach((l) => { y -= 24; content += 'BT /F1 12 Tf 50 ' + y + ' Td (' + esc(l) + ') Tj ET\n'; });
+const objs = ['<< /Type /Catalog /Pages 2 0 R >>', '<< /Type /Pages /Kids [3 0 R] /Count 1 >>', '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>', '<< /Length ' + content.length + ' >>\nstream\n' + content + 'endstream', '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>'];
+let out = '%PDF-1.4\n';
+const offs = [];
+objs.forEach((o, i) => { offs.push(out.length); out += (i + 1) + ' 0 obj\n' + o + '\nendobj\n'; });
+const xr = out.length;
+out += 'xref\n0 ' + (objs.length + 1) + '\n0000000000 65535 f \n' + offs.map((o) => String(o).padStart(10, '0') + ' 00000 n \n').join('') + 'trailer\n<< /Size ' + (objs.length + 1) + ' /Root 1 0 R >>\nstartxref\n' + xr + '\n%%EOF';
+return new Blob([out], { type: 'application/pdf' });
+};
+const doDownload = () => {
+if (!dd || !dd.inv) return;
+const lines = ['VoleAlti - Invoice ' + dd.inv.no, 'Sample invoice, mock data for demonstration only', ''].concat(dd.inv.rows.map((r) => r.k + ': ' + r.v));
+try {
+const a = document.createElement('a');
+a.href = URL.createObjectURL(pdf(lines));
+a.download = dd.inv.no + '.pdf';
+document.body.appendChild(a);
+a.click();
+a.remove();
+} catch (e) {}
+};
+for (let n = 1; n <= 31; n++) {
+let st ='min-height: 56px; box-sizing: border-box; padding: 8px; border-radius: 6px; border: 1px solid #EFE9DA; font-size: 14px; color: #1B2433';
+if (trips.includes(n)) st = 'min-height: 56px; box-sizing: border-box; padding: 8px; border-radius: 6px; border: 1px solid #0E1A2E; background: #0E1A2E; font-size: 14px; color: #F7F3EA; font-weight: 600';
+if (quotes.includes(n)) st = 'min-height: 56px; box-sizing: border-box; padding: 8px; border-radius: 6px; border: 2px solid #7A5C24; font-size: 14px; color: #7A5C24; font-weight: 600';
+if (details[n]) st += '; cursor: pointer';
+if (this.state.day === n) st += '; box-shadow: 0 0 0 3px #C9A96B';
+days.push({ label: String(n), style: st, pick: () => { if (details[n]) this.setState({ day: n, view: 'summary', asked: false }); } });
+}
+const picked = (this.state.picks[day] || '');
+const optBox = 'border: 1px solid #E3DCCB; border-radius: 8px; padding: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px';
+const quoteOpts = dd && dd.opts ? dd.opts.map((o) => ({
+name: o.name, sub: o.sub, price: o.price,
+box: picked === o.id ? optBox + '; border: 2px solid #7A5C24; background: #FBF6EA' : optBox,
+btn: picked === o.id ? 'min-height: 44px; padding: 0 20px; border: 0; border-radius: 6px; background: #7A5C24; color: #FFFFFF; font: inherit; font-weight: 600; cursor: default' : 'min-height: 44px; padding: 0 20px; border: 0; border-radius: 6px; background: #0E1A2E; color: #F7F3EA; font: inherit; font-weight: 600; cursor: pointer',
+label: picked === o.id ? 'Accepted' : 'Accept quote',
+pick: () => this.setState({ picks: { ...this.state.picks, [day]: o.id } })
+})) : [];
+const chosen = dd && dd.opts ? dd.opts.find((o) => o.id === picked) : null;
+const withGo = dd ? dd.actions.map((a) => ({ label: a.label, style: a.style, go: a.go === 'download' ? () => { doDownload(); this.setState({ view: 'invoice' }); } : go(a.go) })) : [];
+return {
+detail: dd ? { title: dd.title, chip: dd.chip, rows: dd.rows, actions: withGo } : { title: '', chip: '', rows: [], actions: [] },
+showDetail: !!dd,
+showHint: !dd,
+vSummary: !!dd && view === 'summary',
+vInvoice: !!dd && view === 'invoice' && !!dd.inv,
+vTrip: !!dd && view === 'trip' && !!dd.sections,
+vQuote: !!dd && view === 'quote' && !!dd.opts,
+vAsk: !!dd && view === 'ask',
+vRequest: !!dd && view === 'request',
+inv: dd && dd.inv ? dd.inv : { no: '', status: '', rows: [] },
+invNote: 'Your PDF has been downloaded. Sample invoice with mock data.',
+download: doDownload,
+tripSections: dd && dd.sections ? dd.sections : [],
+quoteIntro: dd && dd.quoteIntro ? dd.quoteIntro : '',
+quoteOpts,
+quoteDone: !!chosen,
+quoteMsg: chosen ? 'Quote accepted: ' + chosen.name + ' at ' + chosen.price + '. Sophie Hartley will confirm within 2 working hours and send your invoice.' : '',
+contact,
+asked: this.state.asked,
+send: () => this.setState({ asked: true }),
+timeline: dd && dd.timeline ? dd.timeline : [],
+back: () => this.setState({ view: 'summary', asked: false }),
+closeDetail: () => this.setState({ day: null, view: 'summary', asked: false }),
+days
+};
+}
+}
+</script>
+<script src="./dc-lite.js"></script>
+</body>
+</html>
