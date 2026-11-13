@@ -13,7 +13,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#F7F3EA}
-@media (max-width: 640px){.hamb{display:inline-flex !important;align-items:center;justify-content:center;width:44px;height:44px;cursor:pointer;margin-right:-10px}.mainnav{display:none !important;flex:1 1 100%;flex-direction:column;align-items:stretch !important;gap:0 !important;border-top:1px solid #24324C}.navtoggle:checked ~ .mainnav{display:flex !important}.mainnav a{display:flex;align-items:center;min-height:48px;padding:0 4px;border-bottom:1px solid #1B2A44}.mainnav a[href="Main.dc.html"]{justify-content:center;margin:14px 0 4px;border:1px solid #3A4966 !important}.fld{flex:1 1 100% !important}.snav{flex:1 1 100% !important;flex-direction:row !important;overflow-x:auto;gap:6px !important}.snav button{flex:none;white-space:nowrap;padding:0 12px !important;font-size:15px !important}.ovwrap{padding:16px !important}.ovcard{padding:20px !important;max-height:calc(100vh - 32px) !important}}
+input.dt{-webkit-appearance:none;appearance:none;width:100%;max-width:100%;min-width:0;display:block;box-sizing:border-box;height:48px}
+input.dt::-webkit-date-and-time-value{text-align:left;margin:0;min-height:1.2em}
+@media (pointer:coarse){input.dt.empty::-webkit-datetime-edit{opacity:0}.dph{display:block !important}}
+@media (max-width: 640px){.svc{flex:1 1 100%;flex-wrap:nowrap !important;overflow-x:auto;margin:0 -28px;padding:2px 28px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.svc::-webkit-scrollbar{display:none}.svc button{flex:none;white-space:nowrap}.seg{flex-wrap:nowrap !important}.seg button{flex:1 1 0;padding:0 6px !important;white-space:nowrap}.fld{min-width:0}.hamb{display:inline-flex !important;align-items:center;justify-content:center;width:44px;height:44px;cursor:pointer;margin-right:-10px}.mainnav{display:none !important;flex:1 1 100%;flex-direction:column;align-items:stretch !important;gap:0 !important;border-top:1px solid #24324C}.navtoggle:checked ~ .mainnav{display:flex !important}.mainnav a{display:flex;align-items:center;min-height:48px;padding:0 4px;border-bottom:1px solid #1B2A44}.mainnav a[href="Main.dc.html"]{justify-content:center;margin:14px 0 4px;border:1px solid #3A4966 !important}.fld{flex:1 1 100% !important}.snav{flex:1 1 100% !important;flex-direction:row !important;overflow-x:auto;gap:6px !important}.snav button{flex:none;white-space:nowrap;padding:0 12px !important;font-size:15px !important}.ovwrap{padding:16px !important}.ovcard{padding:20px !important;max-height:calc(100vh - 32px) !important}}
 input[type=date],input[type=datetime-local]{color-scheme:light}
 input[type=date]::-webkit-datetime-edit,input[type=date]::-webkit-datetime-edit-fields-wrapper,input[type=date]::-webkit-datetime-edit-text,input[type=date]::-webkit-datetime-edit-day-field,input[type=date]::-webkit-datetime-edit-month-field,input[type=date]::-webkit-datetime-edit-year-field,input[type=datetime-local]::-webkit-datetime-edit,input[type=datetime-local]::-webkit-datetime-edit-fields-wrapper,input[type=datetime-local]::-webkit-datetime-edit-text,input[type=datetime-local]::-webkit-datetime-edit-day-field,input[type=datetime-local]::-webkit-datetime-edit-month-field,input[type=datetime-local]::-webkit-datetime-edit-year-field,input[type=datetime-local]::-webkit-datetime-edit-hour-field,input[type=datetime-local]::-webkit-datetime-edit-minute-field{color:inherit}
 input[type=date]::-webkit-calendar-picker-indicator,input[type=datetime-local]::-webkit-calendar-picker-indicator{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
@@ -59,7 +62,7 @@ a{color:inherit}
 <div id="search" style="background: #FFFFFF; border: 1px solid #E3DCCB; border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 22px">
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
 <h2 style="margin: 0; font-family: 'Cinzel', serif; font-weight: 500; font-size: 22px; color: #0E1A2E">Search</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="svc" style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
 <button onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
 </sc-for>
@@ -70,7 +73,7 @@ a{color:inherit}
 </sc-if>
 <sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
 <sc-if value="{{showTrip}}" hint-placeholder-val="{{ true }}">
-<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<div class="seg" style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{tripTypes}}" as="tt" hint-placeholder-count="3">
 <button onClick="{{tt.pick}}" style="{{tt.style}}">{{tt.label}}</button>
 </sc-for>
@@ -86,7 +89,7 @@ a{color:inherit}
 <option value="{{c.v}}" selected="{{c.sel}}">{{c.v}}</option>
 </sc-for>
 </select></sc-if>
-<sc-if value="{{f.isDate}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><input type="{{f.dtype}}" value="{{f.value}}" onInput="{{f.input}}" aria-label="{{f.label}}" style="{{f.dstyle}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5C24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; right: 14px; top: 14px; pointer-events: none"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span></sc-if>
+<sc-if value="{{f.isDate}}" hint-placeholder-val="{{ false }}"><span style="position: relative; display: block"><input class="{{f.dcls}}" type="{{f.dtype}}" value="{{f.value}}" onInput="{{f.input}}" aria-label="{{f.label}}" style="{{f.dstyle}}"><sc-if value="{{f.dempty}}" hint-placeholder-val="{{ false }}"><span class="dph" aria-hidden="true" style="display: none; position: absolute; left: 14px; top: 0; line-height: 48px; font-size: 16px; color: #757575; pointer-events: none">Select date</span></sc-if><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5C24" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; right: 14px; top: 14px; pointer-events: none"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span></sc-if>
 <sc-if value="{{f.showList}}" hint-placeholder-val="{{ false }}">
 <div role="listbox" style="position: absolute; z-index: 5; top: 82px; left: 0; right: 0; min-width: 260px; background: #FFFFFF; border: 1px solid #CFC7B3; border-radius: 6px; box-shadow: 0 8px 24px rgba(14,26,46,0.12); overflow: hidden">
 <sc-for list="{{f.options}}" as="o" hint-placeholder-count="4">
@@ -357,7 +360,9 @@ isField: !f.brk,
 lstyle: 'position: relative; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #566070; flex: ' + (f.grow ? '1 1 220px' : f.w ? '0 1 ' + f.w + 'px' : '1 1 180px'),
 choices: (f.opts || []).map((v) => ({ v, sel: (value || f.def) === v })),
 dtype: /time/i.test(f.label) ? 'datetime-local' : 'date',
-dstyle: 'position: relative; width: 100%; box-sizing: border-box; min-height: 48px; padding: 0 44px 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; cursor: pointer; color: ' + (value ? '#1B2433' : '#757575'),
+dcls: value ? 'dt' : 'dt empty',
+dempty: !value,
+dstyle: 'position: relative; width: 100%; max-width: 100%; min-width: 0; display: block; -webkit-appearance: none; appearance: none; text-align: left; box-sizing: border-box; min-height: 48px; padding: 0 44px 0 14px; border: 1px solid #CFC7B3; border-radius: 6px; background: #FFFFFF; font: inherit; font-size: 16px; cursor: pointer; color: ' + (value ? '#1B2433' : '#757575'),
 value,
 input: (e) => {
 let v = e.target.value;
